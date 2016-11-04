@@ -306,7 +306,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_W) {
 			wPressed = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_S) {
-			sPressed = false; //FIXED>>>>>
+			sPressed = false; //FIXED>>>>>>
 		}
 	}
 
