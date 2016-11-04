@@ -210,7 +210,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.drawString("Pong Game", 130, 100);
 
 			// FIXME Wellcome message below show smaller than game title
-			g.drawString("Press 'P' to play.", 135, 400); //<<<<FIXED>>>>
+			g.drawString("Press 'P' to play.", 135, 400);
 		} else if (playing) {
 
 			/* Game is playing */
@@ -232,7 +232,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString(String.valueOf(playerOneScore), 100, 100); // Player 1
 																	// score
-			g.drawString(String.valueOf(playerTwoScore), 400, 100); // Player 2 FIXED >
+			g.drawString(String.valueOf(playerTwoScore), 400, 100); // Player
 																	// score
 
 			// draw the ball
