@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -44,7 +45,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
-
+	private ImageIcon img2 = new ImageIcon("image\\mi.jpg");
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
@@ -62,13 +63,16 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int playerOneX = 0;
 	private int playerOneY = 250;
 	private int playerOneWidth = 10;
-	private int playerOneHeight = 50;
+	private int playerOneHeight = 80;
+	private ImageIcon img1 = new ImageIcon("image\\Untitled1.png");
 
 	/** Player 2's paddle: position and size */
 	private int playerTwoX = 473;
 	private int playerTwoY = 250;
 	private int playerTwoWidth = 10;
-	private int playerTwoHeight = 50;
+	private int playerTwoHeight = 80;
+	private ImageIcon img = new ImageIcon("image\\Untitled.png");
+	
 
 	/** Speed of the paddle - How fast the paddle move. */
 	private int paddleSpeed = 5;
@@ -104,21 +108,21 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 			// move player 1
 			// Move up if after moving, paddle is not outside the screen
-			if (upPressed && playerOneY - paddleSpeed > 0) {
+			if (wPressed && playerOneY - paddleSpeed > 0) {
 				playerOneY -= paddleSpeed;
 			}
 			// Move down if after moving paddle is not outside the screen
-			if (downPressed && playerOneY + playerOneHeight + paddleSpeed < getHeight()) {
+			if (sPressed && playerOneY + playerOneHeight + paddleSpeed < getHeight()) {
 				playerOneY += paddleSpeed;
 			}
 
 			// move player 2
 			// Move up if after moving paddle is not outside the screen
-			if (wPressed && playerTwoY - paddleSpeed > 0) {
+			if (upPressed && playerTwoY - paddleSpeed > 0) {
 				playerTwoY -= paddleSpeed;
 			}
 			// Move down if after moving paddle is not outside the screen
-			if (sPressed && playerTwoY + playerTwoHeight + paddleSpeed < getHeight()) {
+			if (downPressed && playerTwoY + playerTwoHeight + paddleSpeed < getHeight()) {
 				playerTwoY += paddleSpeed;
 			}
 
@@ -208,12 +212,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		if (showTitleScreen) {
 
 			/* Show welcome screen */
-
+			g.drawImage(img2.getImage(), 0, 0, 500,500,null);
 			// Draw game title and start message
 			g.setColor(Color.lightGray);
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString("Pong Game", 130, 100);
-
+			
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 			
@@ -257,6 +261,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// draw the paddles
 			g.fillRect(playerOneX, playerOneY, playerOneWidth, playerOneHeight);
 			g.fillRect(playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight);
+			g.drawImage(img.getImage(),playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight,null);
+			g.drawImage(img1.getImage(),playerOneX, playerOneY, playerOneWidth, playerOneHeight,null);
 		} else if (gameOver) {
 			/* Show End game screen with winner name and score */
 			// Draw scores
