@@ -45,7 +45,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 
 	/** Background. */
 	private Color backgroundColor = Color.BLACK;
-	private ImageIcon img2 = new ImageIcon("image\\mi.jpg");
+	private ImageIcon img2 = new ImageIcon("image\\main_bg.png");
+	private ImageIcon title = new ImageIcon("image\\title.png");
 	/** State on the control keys. */
 	private boolean upPressed;
 	private boolean downPressed;
@@ -64,14 +65,14 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private int playerOneY = 250;
 	private int playerOneWidth = 10;
 	private int playerOneHeight = 80;
-	private ImageIcon img1 = new ImageIcon("image\\Untitled1.png");
+	private ImageIcon img1 = new ImageIcon("image\\Paddle_1.png");
 
 	/** Player 2's paddle: position and size */
 	private int playerTwoX = 473;
 	private int playerTwoY = 250;
 	private int playerTwoWidth = 10;
 	private int playerTwoHeight = 80;
-	private ImageIcon img = new ImageIcon("image\\Untitled.png");
+	private ImageIcon img = new ImageIcon("image\\Paddle_2.png");
 	
 
 	/** Speed of the paddle - How fast the paddle move. */
@@ -212,14 +213,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		if (showTitleScreen) {
 
 			/* Show welcome screen */
-			g.drawImage(img2.getImage(), 0, 0, 500,500,null);
+			g.drawImage(img2.getImage(), 0, 0, 500,500,null);		
 			// Draw game title and start message
-			g.setColor(Color.lightGray);
-			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
-			g.drawString("Pong Game", 130, 100);
-			
+			g.setColor(Color.WHITE);
+			g.drawImage(title.getImage(), 90, 60, 300, 80,null);
 			// FIXME Wellcome message below show smaller than game title
-			g.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 			
 			g.drawString("Press 'P' to play.", 155, 400);
 			g.drawString("Press 'S' to settings.", 155, 425);
@@ -236,12 +235,11 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			int playerTwoLeft = playerTwoX;
 
 			// draw dashed line down center
-			g.setColor(Color.GREEN);
+			g.setColor(Color.darkGray);
 			for (int lineY = 0; lineY < getHeight(); lineY += 50) {
 				g.drawLine(250, lineY, 250, lineY + 25);
 			}
 
-			// draw "goal lines" on each side
 			
 			g.drawLine(playerOneRight, 0, playerOneRight, getHeight());
 			g.drawLine(playerTwoLeft, 0, playerTwoLeft, getHeight());
@@ -257,12 +255,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			// draw the ball
 			g.setColor(Color.RED);
 			g.fillOval(ballX, ballY, diameter, diameter);
-
 			// draw the paddles
-			g.fillRect(playerOneX, playerOneY, playerOneWidth, playerOneHeight);
-			g.fillRect(playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight);
-			g.drawImage(img.getImage(),playerTwoX, playerTwoY, playerTwoWidth, playerTwoHeight,null);
-			g.drawImage(img1.getImage(),playerOneX, playerOneY, playerOneWidth, playerOneHeight,null);
+			g.drawImage(img.getImage(),playerTwoX-1, playerTwoY, playerTwoWidth+3, playerTwoHeight,null);
+			g.drawImage(img1.getImage(),playerOneX-2, playerOneY, playerOneWidth+3, playerOneHeight,null);
+			
 		} else if (gameOver) {
 			/* Show End game screen with winner name and score */
 			// Draw scores
@@ -292,7 +288,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 13));
 			g.drawString("Player name 1:", 30, 75);
 			g.drawString("Player name 2:", 30, 100);
-			this.add(txtUser1);
+			add(txtUser1);
 			txtUser1.setBounds(150, 60, 100, 25);
 			txtUser1.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
@@ -307,6 +303,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		if (showTitleScreen) {
 			if (e.getKeyCode() == KeyEvent.VK_P) {
 				showTitleScreen = false;
+				settings = false;
 				playing = true;
 			}else if (e.getKeyCode() == KeyEvent.VK_S) {
 				showTitleScreen = false;
