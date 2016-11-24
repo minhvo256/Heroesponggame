@@ -1,0 +1,29 @@
+/** Background. */ /add image title,paddle/
+	private Color backgroundColor = Color.BLACK;
+	private ImageIcon img2 = new ImageIcon("image\\main_bg.png");
+	private ImageIcon title = new ImageIcon("image\\title.png");
+  
+  /** Player 1's paddle: position and size *
+	private int playerOneX = 0;
+	private int playerOneY = 250;
+	private int playerOneWidth = 10;
+	private int playerOneHeight = 80;
+	private ImageIcon img1 = new ImageIcon("image\\Paddle_1.png");
+  
+  /** Player 2's paddle: position and size *
+	private int playerTwoX = 473;
+	private int playerTwoY = 250;
+	private int playerTwoWidth = 10;
+	private int playerTwoHeight = 80;
+	private ImageIcon img = new ImageIcon("image\\Paddle_2.png");
+  
+  /* Show welcome screen */ /add image welcome screen/
+			g.drawImage(img2.getImage(), 0, 0, 500,500,null);	
+      
+      // Draw game title and start message /add image title/
+			g.setColor(Color.WHITE);
+			g.drawImage(title.getImage(), 90, 60, 300, 80,null);
+      
+      // draw the paddles /add image paddle/
+			g.drawImage(img.getImage(),playerTwoX-1, playerTwoY, playerTwoWidth+3, playerTwoHeight,null);
+			g.drawImage(img1.getImage(),playerOneX-2, playerOneY, playerOneWidth+3, playerOneHeight,null);
