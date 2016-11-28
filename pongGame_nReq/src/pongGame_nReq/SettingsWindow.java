@@ -31,11 +31,11 @@ public class SettingsWindow extends JDialog{
 		txtUsername1.setBounds(90, 26, 100, 20);
 		txtUsername2.setBounds(90, 66, 100, 20);
 		
-		JLabel lblUser_1 = new JLabel("Username 1");
+		JLabel lblUser_1 = new JLabel("Player 1: ");
 		lblUser_1.setBounds(10, 29, 71, 14);
 		getContentPane().add(lblUser_1);
 		
-		JLabel lblUser_2 = new JLabel("Username 2");
+		JLabel lblUser_2 = new JLabel("Player 2:");
 		lblUser_2.setBounds(10, 69, 71, 14);
 		getContentPane().add(lblUser_2);
 		
@@ -46,7 +46,7 @@ public class SettingsWindow extends JDialog{
 				setVisible(false);
 			}
 		});
-		btnSave.setBounds(44, 114, 89, 23);
+		btnSave.setBounds(280, 410, 89, 23);
 		getContentPane().add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -56,7 +56,7 @@ public class SettingsWindow extends JDialog{
 				setVisible(false);
 			}
 		});
-		btnCancel.setBounds(154, 114, 89, 23);
+		btnCancel.setBounds(380, 410, 89, 23);
 		getContentPane().add(btnCancel);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		pack();
