@@ -1,15 +1,20 @@
 package pongGame_nReq;
 
 import java.awt.Color;
-
+/**
+ * 
+ * @author Khoa Dao
+ *
+ */
 public class SettingsPanel {
 	private String userName1, userName2;
-	private Color backgroundColor, paddleColor, ballColor;
+	private Color backgroundColor, ballColor;
+	private int paddleColor;
 	private int ballNumber;
 
 	public SettingsPanel(){	}
 	
-	public SettingsPanel(String userName1, String userName2, Color backgroundColor, Color paddleColor, Color ballColor) {
+	public SettingsPanel(String userName1, String userName2, Color backgroundColor, int paddleColor, Color ballColor) {
 		super();
 		this.userName1 = userName1;
 		this.userName2 = userName2;
@@ -47,11 +52,11 @@ public class SettingsPanel {
 		this.backgroundColor = backgroundColor;
 	}
 
-	public Color getPaddleColor() {
+	public int getPaddleStyle() {
 		return paddleColor;
 	}
 
-	public void setPaddleColor(Color paddleColor) {
+	public void setPaddleStyle(int paddleColor) {
 		this.paddleColor = paddleColor;
 	}
 

@@ -11,12 +11,20 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class PlaySound {
-	void playSound(String soundFile) throws MalformedURLException, UnsupportedAudioFileException, IOException, LineUnavailableException {
-	    File f = new File("./" + soundFile);
-	    AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  
-	    Clip clip = AudioSystem.getClip();
-	    clip.open(audioIn);
-	    clip.start();
+	void playSound(String soundFile) {
+		Clip clip = null;
+	    try{
+	    	File f = new File("./" + soundFile);
+		    AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  
+		    clip = AudioSystem.getClip();
+		    clip.open(audioIn);
+		    clip.start();	
+	    }
+	    catch(Exception e1){
+	    	clip.close();
+	    }
+		
 	}
+	
 
 }
