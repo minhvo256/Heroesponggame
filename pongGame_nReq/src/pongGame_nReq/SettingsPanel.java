@@ -11,7 +11,7 @@ public class SettingsPanel {
 	private Color backgroundColor, ballColor;
 	private int paddleColor;
 	private int ballNumber;
-
+	private int iMaxPoint;
 	public SettingsPanel(){	}
 	
 	public SettingsPanel(String userName1, String userName2, Color backgroundColor, int paddleColor, Color ballColor) {
@@ -35,7 +35,13 @@ public class SettingsPanel {
 	public void setBallNumber(int ballNumber) {
 		this.ballNumber = ballNumber;
 	}
+	public int getMaxPoint() {
+		return iMaxPoint;
+	}
 
+	public void setMaxPoint(int iMaxPoint) {
+		this.iMaxPoint = iMaxPoint;
+	}
 	public String getUserName2() {
 		return userName2;
 	}

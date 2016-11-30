@@ -184,7 +184,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					playerTwoScore++;
 
 					// Player 2 Win, restart the game
-					if (playerTwoScore == 3) {
+					if (playerTwoScore == Settings.getMaxPoint()) {
 						playing = false;
 						gameOver = true;
 					}
@@ -208,7 +208,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					playerOneScore++;
 
 					// Player 1 Win, restart the game
-					if (playerOneScore == 3) {
+					if (playerOneScore == Settings.getMaxPoint()) {
 						playing = false;
 						gameOver = true;
 					}

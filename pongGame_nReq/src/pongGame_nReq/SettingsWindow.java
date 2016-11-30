@@ -39,6 +39,7 @@ import java.awt.event.ActionEvent;
 public class SettingsWindow extends JDialog{
 	private JTextField txtUsername1;
 	private JTextField txtUsername2;
+	private JTextField txtPoint;
 	private ImageIcon imgBall1 = new ImageIcon("assets\\ball1.png");
 	private ImageIcon imgBall2 = new ImageIcon("assets\\ball2.png");
 	private ImageIcon imgBall3 = new ImageIcon("assets\\ball3.png");
@@ -79,22 +80,30 @@ public class SettingsWindow extends JDialog{
 		dialogResult = MyDialogResult.DEFAULT;
 		txtUsername1 = new JTextField(10);
 		txtUsername2 = new JTextField(10);
+		txtPoint = new JTextField(10);
 		getContentPane().add(txtUsername1);
 		getContentPane().add(txtUsername2);
+		getContentPane().add(txtPoint);
 		getContentPane().setBackground(Color.BLACK);
 		txtUsername1.setBounds(90, 65, 120, 25);
 		txtUsername2.setBounds(90, 107, 120, 25);
+		txtPoint.setBounds(100, 355, 120, 25);
 		txtUsername1.requestFocus(false);
 		txtUsername1.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
 		txtUsername2.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+		txtPoint.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
 		txtUsername1.setBackground(Color.BLACK);
 		txtUsername2.setBackground(Color.BLACK);
+		txtPoint.setBackground(Color.BLACK);
+		txtPoint.setCaretColor(Color.LIGHT_GRAY);
 		txtUsername1.setCaretColor(Color.LIGHT_GRAY);
 		txtUsername2.setCaretColor(Color.LIGHT_GRAY);
 		txtUsername1.setForeground(Color.LIGHT_GRAY);
 		txtUsername2.setForeground(Color.LIGHT_GRAY);
+		txtPoint.setForeground(Color.LIGHT_GRAY);
 		txtUsername1.setText("Player 1");
 		txtUsername2.setText("Player 2");
+		txtPoint.setText("3");
 		// Limit user name only containt 15 digit
 		txtUsername1.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -110,6 +119,14 @@ public class SettingsWindow extends JDialog{
 				}
 			}
 		});
+		txtPoint.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char ch;
+				if (e.getKeyChar() < '0' || e.getKeyChar() > '9') {
+					e.consume();
+				}
+			}
+		});
 		// Descriptions
 		JLabel lblUser_1 = new JLabel("Player 1: ");
 		lblUser_1.setBounds(10, 70, 71, 14);
@@ -120,6 +137,11 @@ public class SettingsWindow extends JDialog{
 		lblUser_2.setBounds(10, 112, 71, 14);
 		lblUser_2.setForeground(Color.WHITE);
 		getContentPane().add(lblUser_2);
+		
+		JLabel lblPoint = new JLabel("Maxium point: ");
+		lblPoint.setForeground(Color.WHITE);
+		lblPoint.setBounds(10, 360, 100, 14);
+		getContentPane().add(lblPoint);
 		
 		JLabel lblTitle = new JLabel("Settings");
 		lblTitle.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
@@ -260,6 +282,7 @@ public class SettingsWindow extends JDialog{
 		SettingsPanel st = new SettingsPanel();
 		st.setUserName1(txtUsername1.getText());
 		st.setUserName2(txtUsername2.getText());
+		st.setMaxPoint(Integer.parseInt(txtPoint.getText()));
 		if (optBall1.isSelected()) {
 			st.setBallNumber(1);
 		}else if (optBall2.isSelected()){
@@ -278,6 +301,7 @@ public class SettingsWindow extends JDialog{
 		}else if (optPad4.isSelected()) {
 			st.setPaddleStyle(4);
 		}
+		
 		return st;
 	}
 }
