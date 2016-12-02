@@ -11,20 +11,25 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class PlaySound {
+	Clip clip = null;
 	void playSound(String soundFile) {
-		Clip clip = null;
 	    try{
 	    	File f = new File("./" + soundFile);
 		    AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());  
 		    clip = AudioSystem.getClip();
-		    clip.open(audioIn);
-		    clip.start();	
+		    
+		    	 clip.open(audioIn);
+				 clip.start();	
+		    
+		 
+		   
 	    }
 	    catch(Exception e1){
-	    	clip.close();
+	    	
 	    }
-		
 	}
+	
+	
 	
 
 }

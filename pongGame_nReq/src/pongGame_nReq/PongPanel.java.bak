@@ -65,6 +65,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private Color backgroundColor = Color.BLACK;
 	private ImageIcon imgBackground = new ImageIcon("assets\\main_bg.png");
 	private ImageIcon title = new ImageIcon("assets\\title.png");
+	private ImageIcon imgGOBackground = new ImageIcon("assets\\bg_gameover.png");
 	private ImageIcon imgPlayingBackground = new ImageIcon("assets\\background.jpg");
 	/** State on the control keys. */
 	private boolean upPressed;
@@ -109,14 +110,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		// listen to key presses
 		setFocusable(true);
 		addKeyListener(this);
-		f.playSound("sound\\start.wav");
 		// call step() 60 fps
-		Timer timer = new Timer(1000 / 60,this);
+		Timer timer = new Timer(1000 / 60, this);
 		timer.start();
 	}
 	/** Implement actionPerformed */
 	public void actionPerformed(ActionEvent e) {
-		step();		
+		step();
 	}
 	
 	/** Repeated task */
@@ -181,7 +181,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				
 				// is it going to miss the paddle?
 				if (nextBallTop > playerOneBottom || nextBallBottom < playerOneTop) {
-					f.playSound("sound\\score.wav");	
+
 					playerTwoScore++;
 
 					// Player 2 Win, restart the game
@@ -205,7 +205,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 				}
 				// is it going to miss the paddle?
 				if (nextBallTop > playerTwoBottom || nextBallBottom < playerTwoTop) {
-					f.playSound("sound\\score.wav");
+
 					playerOneScore++;
 
 					// Player 1 Win, restart the game
@@ -243,13 +243,13 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.drawImage(imgBackground.getImage(), 0, 0, 500,500,null);		
 			// Draw game title and start message
 			g.setColor(Color.WHITE);
-			g.drawImage(title.getImage(), 90, 60, 300, 80,null);
+			g.drawImage(title.getImage(), 70, 50, 350, 110,null);
 			// FIXME Wellcome message below show smaller than game title
 			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 			
-			g.drawString("Press 'P' to play.", 155, 400);
-			g.drawString("Press 'S' to settings.", 155, 425);
-			
+			g.drawString("Press 'P' to play.", 155, 410);
+			g.drawString("Press 'S' to settings.", 155, 435);
+			f.playSound("sound\\ping.wav");
 			//Reset score
 			playerOneScore = 0;
 			playerTwoScore = 0;
@@ -271,16 +271,30 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			g.drawLine(playerOneRight, 0, playerOneRight, getHeight());
 			g.drawLine(playerTwoLeft, 0, playerTwoLeft, getHeight());
 			// draw player name
-			g.setColor(Color.LIGHT_GRAY);
+			g.setColor(Color.WHITE);
 			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-			g.drawString(Settings.getUserName1(), 80, 160);
-			g.drawString(Settings.getUserName2(), 380, 160);
+			int iTempU1 = Settings.getUserName1().length();
+			int iTempU2 = Settings.getUserName2().length();
+			int iEstimate = 0;
+			int iEstimate2 = 0;
+			if (iTempU1 == 15) {
+				iEstimate = 35;
+			}else if (iTempU1 <= 12 || iTempU1 >= 9) {
+				iEstimate = 85;
+			}
+			if (iTempU2 == 15) {
+				iEstimate2 = 295;
+			}else if (iTempU2 <= 12 || iTempU2 >= 9 ) {
+				iEstimate2 = 325;
+			}
+			g.drawString(Settings.getUserName1(), iEstimate, 150);
+			g.drawString(Settings.getUserName2(), iEstimate2, 150);
 			// draw the scores
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
-			g.setColor(Color.BLUE);
-			g.drawString(String.valueOf(playerOneScore), 100, 100); // Player 1
+			g.setColor(Color.WHITE);
+			g.drawString(String.valueOf(playerOneScore), 120, 100); // Player 1
 																	// score
-			g.drawString(String.valueOf(playerTwoScore), 400, 100); // Player 2
+			g.drawString(String.valueOf(playerTwoScore), 370, 100); // Player 2
 			
 			// draw the ball
 			if (Settings.getBallNumber() == 1) {
@@ -290,7 +304,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			}else if (Settings.getBallNumber() == 3) {
 				g.drawImage(imgBall3.getImage(), ballX, ballY, diameter, diameter,null);
 			}else if (Settings.getBallNumber() == 4) {
-				g.setColor(Color.RED);
+				g.setColor(Color.CYAN);
 				g.fillOval( ballX, ballY, diameter, diameter);
 			}
 			Random rand = new Random();
@@ -318,23 +332,38 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			/* Show End game screen with winner name and score */
 			// Draw scores
 			// TODO Set Blue color
-			g.setColor(Color.BLUE);
+			g.drawImage(imgGOBackground.getImage(), 0, 0, 500, 500, null);
+			g.setColor(Color.LIGHT_GRAY);
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
 			g.drawString(String.valueOf(playerOneScore), 100, 100);
 			g.drawString(String.valueOf(playerTwoScore), 400, 100);
 
 			// Draw the winner name
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 36));
+			int iTempU1 = Settings.getUserName1().length();
+			int iTempU2 = Settings.getUserName2().length();
+			int iTmpPosition = 0;
+			int iTmpPosition2 = 0;
+			if (iTempU1 == 15 || iTempU1 >= 12) {
+				iTmpPosition = 50;
+			}else if (iTempU1 <= 11 || iTempU1 >= 6) {
+				iTmpPosition = 110;
+			}
+			if (iTempU2 == 15 || iTempU2 >= 12) {
+				iTmpPosition2 = 50;
+			}else if (iTempU2 <= 11 || iTempU2 >= 6) {
+				iTmpPosition2 = 110;
+			}
 			if (playerOneScore > playerTwoScore) {
-				g.drawString(Settings.getUserName1() +" Wins!", 165, 200);
+				g.drawString(Settings.getUserName1() +" Wins!", iTmpPosition, 200);
 			} else {
-				g.drawString(Settings.getUserName2() + " Wins!", 165, 200);
+				g.drawString(Settings.getUserName2() + " Wins!", iTmpPosition2, 200);
 			}
 
 			// Draw Restart message
 			g.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
-			g.drawString("Press 'Spacebar' to restart", 175, 400);
-			//f.playSound("sound\\end.wav");
+			g.drawString("Press 'Spacebar' to restart", 155, 400);
+			f.playSound("sound\\ping.wav");
 			// TODO Draw a restart message
 		}
 		repaint();
@@ -370,7 +399,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			playerTwoY = 250;
 			ballX = 250;
 			ballY = 250;
-			
 		}
 	}
 
